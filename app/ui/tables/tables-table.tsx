@@ -1,13 +1,13 @@
 import {
-    DishesTableType,
-    FormattedDishesTable,
+    
+    FormattedTablesTableType,
 } from '@/app/lib/definitions';
 
 
-export default async function DishesTable({
-    dishes,
+export default async function TablesTable({
+    tables,
 }: {
-    dishes: FormattedDishesTable[];
+    tables: FormattedTablesTableType[];
 }) {
     const group = (items: any[], n: number) => items.reduce((acc, x, i) => {
         const idx = Math.floor(i / n);
@@ -23,18 +23,18 @@ export default async function DishesTable({
             <tbody>
 
                {/*Splits dishes list into groups if 3*/}
-                {group(dishes, 3).map((dishTrio: any[], index: number) =>
+                {group(tables, 3).map((tableTrio: any[], index: number) =>
                     /*Unique key prop to ROW*/
                     <tr key={index}>
                         {/*Iterates over groups of 3 dishes*/}
-                        {dishTrio?.map((dish) => (
+                        {tableTrio?.map((table) => (
                             //Unique key prop to row item        
-                            <td key={dish.id} className="w-96 flex-col justify-start items-start gap-2.5 inline-flex bg-white border border-gray-200 rounded-lg shadow hover:bg-[#abbad1]">
+                            <td key={table.id} className="w-96 flex-col justify-start items-start gap-2.5 inline-flex bg-white border border-gray-200 rounded-lg shadow hover:bg-[#abbad1]">
                                 <div className="h-48 w-full object-cover rounded-t-2xl rounded-b-md overflow-hidden">
-                                    <img className="m-auto w-full h-full object-cover" src={dish.dish_image_url} />
+                                    <img className="m-auto w-full h-full object-cover" src={table.table_image_url} />
                                 </div>
-                                <h3 className="w-96 h-5 text-black text-xs font-normal font-['Inter']">{dish.dish_name}</h3>
-                                <p className="w-96 h-40 text-black text-xs font-normal font-['Inter']">{dish.dish_description}</p>
+                                <h3 className="w-96 h-5 text-black text-xs font-normal font-['Inter']">{table.id}</h3>
+                                
                             </td>
                         ))}
                     </tr>
