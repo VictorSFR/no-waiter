@@ -1,21 +1,15 @@
-import {
-    DishesTableType,
-    FormattedDishesTable,
-} from '@/app/lib/definitions';
+import { fetchDishes } from '@/app/lib/data';
+
+const group = (items: any[], n: number) => items.reduce((acc, x, i) => {
+    const idx = Math.floor(i / n);
+    acc[idx] = [...(acc[idx] || []), x];
+    return acc;
+}, []);
 
 
-export default async function DishesTable({
-    dishes,
-}: {
-    dishes: FormattedDishesTable[];
-}) {
-    const group = (items: any[], n: number) => items.reduce((acc, x, i) => {
-        const idx = Math.floor(i / n);
-        acc[idx] = [...(acc[idx] || []), x];
-        return acc;
-    }, []);
+export default async function DishesTable() {
 
-
+    const tables = await fetchDishes();
 
     return (
 
@@ -23,7 +17,7 @@ export default async function DishesTable({
             <tbody>
 
                {/*Splits dishes list into groups if 3*/}
-                {group(dishes, 3).map((dishTrio: any[], index: number) =>
+                {group(tables, 3).map((dishTrio: any[], index: number) =>
                     /*Unique key prop to ROW*/
                     <tr key={index}>
                         {/*Iterates over groups of 3 dishes*/}
@@ -43,6 +37,8 @@ export default async function DishesTable({
 
             </tbody>
         </table>
+        
 
-    );
+    )
+
 }

@@ -24,3 +24,8 @@ export type FormattedDishesTable = {
     dish_description: string;
     dish_image_url: string;
 };
+
+export type Repo = {
+    name: string
+    stargazers_count: number
+};
